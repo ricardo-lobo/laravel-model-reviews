@@ -39,7 +39,7 @@ class ReviewFactory implements ReviewFactoryInterface
         $review->save();
 
         $review->questions()->sync(
-            collect($answers)->mapWithKeys(fn(array $answer) => $this->createAnswerMappingFromArray($answer))
+            collect($answers)->mapWithKeys(fn (array $answer) => $this->createAnswerMappingFromArray($answer))
         );
     }
 
@@ -49,7 +49,7 @@ class ReviewFactory implements ReviewFactoryInterface
 
         if (count($ids) !== count(array_unique($ids))) {
             throw ValidationException::withMessages([
-                'questions' => ['The provided questions are duplicated.']
+                'questions' => ['The provided questions are duplicated.'],
             ]);
         }
     }
@@ -81,7 +81,7 @@ class ReviewFactory implements ReviewFactoryInterface
         return [
             $data['question_id'] => [
                 'rating' => $rating,
-            ]
+            ],
         ];
     }
 

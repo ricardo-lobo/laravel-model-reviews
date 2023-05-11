@@ -21,7 +21,7 @@ class TestCase extends Orchestra
         $this->setupDatabase($this->app);
 
         Factory::guessFactoryNamesUsing(
-            fn(string $modelName
+            fn (string $modelName
             ) => 'RicardoLobo\\LaravelModelReviews\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }

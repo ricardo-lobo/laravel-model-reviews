@@ -16,7 +16,7 @@ it('can create a review', function () {
         [
             'question_id' => $question->id,
             'rating' => RatingEnum::from(1),
-        ]
+        ],
     ]);
 
     expect($testModel->reviews()->count())
@@ -39,7 +39,7 @@ it('can create a review with an author when authenticated', function () {
         [
             'question_id' => $question->id,
             'rating' => RatingEnum::from(1),
-        ]
+        ],
     ]);
 
     /** @var Review $review */
@@ -57,7 +57,7 @@ it('checks if the questions exist before creating a review', function () {
         [
             'question_id' => 1,
             'rating' => RatingEnum::from(1),
-        ]
+        ],
     ]);
 })->throws(Illuminate\Validation\ValidationException::class, 'The provided questions are invalid.');
 
@@ -73,7 +73,7 @@ it('checks if there are duplicated questions when creating a review', function (
         [
             'question_id' => 1,
             'rating' => RatingEnum::from(1),
-        ]
+        ],
     ]);
 })->throws(Illuminate\Validation\ValidationException::class, 'The provided questions are duplicated.');
 
@@ -101,8 +101,8 @@ it('can create a review from a request', function () {
                 [
                     'question_id' => $question->id,
                     'rating' => 1,
-                ]
-            ]
+                ],
+            ],
         ])
         ->assertOk();
 
@@ -135,8 +135,8 @@ it('checks if the questions exist before creating a review from a request', func
                 [
                     'question_id' => 1,
                     'rating' => 1,
-                ]
-            ]
+                ],
+            ],
         ]);
 })->throws(\Illuminate\Validation\ValidationException::class, 'The selected review.0.question_id is invalid.');
 
@@ -170,7 +170,7 @@ it('checks if the questions are duplicated before creating a review from a reque
                 [
                     'question_id' => $question->id,
                     'rating' => 1,
-                ]
-            ]
+                ],
+            ],
         ]);
 })->throws(\Illuminate\Validation\ValidationException::class, 'The review.0.question_id field has a duplicate value.');

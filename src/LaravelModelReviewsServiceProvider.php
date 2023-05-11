@@ -25,7 +25,7 @@ class LaravelModelReviewsServiceProvider extends PackageServiceProvider
             ->hasMigrations()
             ->hasMigrations([
                 'create_model_reviews_table',
-                'create_questions_table'
+                'create_questions_table',
             ])
             ->hasCommand(LaravelModelReviewsCommand::class);
     }
@@ -34,6 +34,6 @@ class LaravelModelReviewsServiceProvider extends PackageServiceProvider
     {
         $this->app->bind(ReviewFactoryInterface::class, fn (Application $app) => $app->make(config('model-reviews.factories.review')));
 
-        $this->app->scoped(ReviewAuthorResolverInterface::class, fn(Application $app) => $app->make(config('model-reviews.author.resolver')));
+        $this->app->scoped(ReviewAuthorResolverInterface::class, fn (Application $app) => $app->make(config('model-reviews.author.resolver')));
     }
 }
