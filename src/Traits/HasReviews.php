@@ -2,11 +2,9 @@
 
 namespace RicardoLobo\LaravelModelReviews\Traits;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Http\Client\Request;
 use RicardoLobo\LaravelModelReviews\Concerns\ReviewFactoryInterface;
 use RicardoLobo\LaravelModelReviews\Http\Requests\CreateReviewFormRequest;
 
@@ -24,7 +22,7 @@ trait HasReviews
     {
         return $this->morphMany(
             related: config('model-reviews.reviews.model'),
-            name:'reviewable',
+            name: 'reviewable',
         );
     }
 

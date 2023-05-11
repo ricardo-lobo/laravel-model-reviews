@@ -2,7 +2,6 @@
 
 namespace RicardoLobo\LaravelModelReviews;
 
-use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Config\Repository;

@@ -14,7 +14,7 @@ class QuestionFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'active' => $this->faker->boolean
+            'active' => $this->faker->boolean,
         ];
     }
 

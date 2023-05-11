@@ -14,7 +14,7 @@ class CreateReviewFormRequest extends FormRequest
         return [
             'review' => ['array', 'required'],
             'review.*.question_id' => ['distinct', 'required', Rule::exists(config('model-reviews.questions.table'), 'id')],
-            'review.*.rating' => ['required', new Enum(RatingEnum::class)]
+            'review.*.rating' => ['required', new Enum(RatingEnum::class)],
         ];
     }
 }
