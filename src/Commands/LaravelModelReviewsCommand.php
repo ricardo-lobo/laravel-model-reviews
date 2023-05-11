@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace RicardoLobo\LaravelModelReviews\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelModelReviewsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-model-reviews';
 
     public $description = 'My command';
 

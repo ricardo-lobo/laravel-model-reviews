@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "ricardolobo/laravel-model-reviews",
+    "description": "Add reviews to a model",
     "keywords": [
-        ":vendor_name",
+        "ricardolobo",
         "laravel",
-        ":package_slug"
+        "laravel-model-reviews"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/ricardolobo/laravel-model-reviews",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Ricardo Lobo",
+            "email": "ricardo.lobo@wisetaillab.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "RicardoLobo\\LaravelModelReviews\\": "src/",
+            "RicardoLobo\\LaravelModelReviews\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "RicardoLobo\\LaravelModelReviews\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "RicardoLobo\\LaravelModelReviews\\LaravelModelReviewsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelModelReviews": "RicardoLobo\\LaravelModelReviews\\Facades\\LaravelModelReviews"
             }
         }
     },

@@ -1,0 +1,19 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create(config('model-reviews.answers.table'), static function (Blueprint $table) {
+            $table->id();
+            $table->integer('rating')->index();
+            $table->unsignedBigInteger('question_id')->index();
+            $table->unsignedBigInteger('review_id')->index();
+            $table->timestamps();
+        });
+    }
+};
