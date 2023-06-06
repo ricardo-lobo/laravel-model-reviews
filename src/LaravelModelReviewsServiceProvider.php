@@ -25,6 +25,7 @@ class LaravelModelReviewsServiceProvider extends PackageServiceProvider
             ->hasMigrations([
                 'create_model_reviews_table',
                 'create_questions_table',
+                'create_answers_table',
             ])
             ->hasCommand(LaravelModelReviewsCommand::class);
     }

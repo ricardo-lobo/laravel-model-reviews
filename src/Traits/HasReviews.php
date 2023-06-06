@@ -26,9 +26,13 @@ trait HasReviews
         );
     }
 
-    public function createReview(array $data): Model
+    public function createReview(array $data, string $comment = null): Model
     {
-        app(ReviewFactoryInterface::class)->create($this, $data);
+        app(ReviewFactoryInterface::class)->create(
+            reviewable: $this,
+            answers: $data,
+            comment: $comment
+        );
 
         return $this;
     }
@@ -37,7 +41,11 @@ trait HasReviews
     {
         $form = app(CreateReviewFormRequest::class);
 
-        app(ReviewFactoryInterface::class)->create($this, $form->validated('review'));
+        app(ReviewFactoryInterface::class)->create(
+            reviewable: $this,
+            answers: $form->validated('review'),
+            comment: $form->validated('comment')
+        );
 
         return $this;
     }
