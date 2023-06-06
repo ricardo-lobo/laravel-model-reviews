@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-model-reviews` will be documented in this file.
 
+## 1.0.1 - 2023-06-06
+
+- Add `getReviewAuthor` method to the `Reviewable` contract to allow to override the author per model review
+
 ## 1.0 - 2023-06-06
 
 - stable release
