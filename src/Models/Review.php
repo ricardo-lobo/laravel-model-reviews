@@ -25,6 +25,7 @@ class Review extends Model
         'reviewable_type',
         'author_id',
         'author_type',
+        'comment'
     ];
 
     public function getTable()
