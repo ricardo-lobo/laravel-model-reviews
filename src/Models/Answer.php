@@ -2,6 +2,7 @@
 
 namespace RicardoLobo\LaravelModelReviews\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use RicardoLobo\LaravelModelReviews\Enums\RatingEnum;
 
@@ -30,5 +31,15 @@ class Answer extends Pivot
     public function getTable()
     {
         return config('model-reviews.answers.table');
+    }
+
+    public function review(): BelongsTo
+    {
+        return $this->belongsTo(config('model-reviews.reviews.model'));
+    }
+
+    public function question(): BelongsTo
+    {
+        return $this->belongsTo(config('model-reviews.questions.model'));
     }
 }
