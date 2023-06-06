@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-model-reviews` will be documented in this file.
 
+## 1.0.3 - 2023-06-06
+
+Add missing relationship methods
+
 ## 1.0.2 - 2023-06-06
 
 - add original question title value to answers pivot table
