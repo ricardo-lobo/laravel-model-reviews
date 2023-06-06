@@ -15,4 +15,6 @@ interface Reviewable
     public function createReview(array $data): Model;
 
     public function createReviewFromRequest(): Model;
+
+    public function getReviewAuthor(): ?Model;
 }

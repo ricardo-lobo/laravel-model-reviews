@@ -49,4 +49,9 @@ trait HasReviews
 
         return $this;
     }
+
+    public function getReviewAuthor(): ?Model
+    {
+        return null;
+    }
 }

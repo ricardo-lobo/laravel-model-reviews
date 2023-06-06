@@ -32,7 +32,7 @@ class ReviewFactory implements ReviewFactoryInterface
         /** @var Review $review */
         $review = $reviewable->reviews()->make(['comment' => $comment]);
 
-        if ($author = $this->getAuthor()) {
+        if ($author = $this->getAuthor($reviewable)) {
             $review->author()->associate($author);
         }
 
@@ -85,12 +85,12 @@ class ReviewFactory implements ReviewFactoryInterface
         ];
     }
 
-    protected function getAuthor(): ?Model
+    protected function getAuthor(Reviewable $reviewable): ?Model
     {
         if (! $this->config->get('model-reviews.author.enabled')) {
             return null;
         }
 
-        return $this->authorResolver->resolve();
+        return $reviewable->getReviewAuthor() ?: $this->authorResolver->resolve();
     }
 }
