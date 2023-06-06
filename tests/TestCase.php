@@ -9,6 +9,7 @@ use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RicardoLobo\LaravelModelReviews\LaravelModelReviewsServiceProvider;
 use RicardoLobo\LaravelModelReviews\Tests\Support\TestModel;
+use Spatie\LaravelRay\RayServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -30,7 +31,7 @@ class TestCase extends Orchestra
     {
         return [
             LaravelModelReviewsServiceProvider::class,
-            \Spatie\LaravelRay\RayServiceProvider::class,
+            RayServiceProvider::class,
         ];
     }
 
@@ -53,6 +54,9 @@ class TestCase extends Orchestra
 
         $answers = include __DIR__.'/../database/migrations/create_answers_table.php.stub';
         $answers->up();
+
+        $answersUpdate = include __DIR__.'/../database/migrations/update_answers_table.php.stub';
+        $answersUpdate->up();
     }
 
     protected function setupDatabase(?Application $app): void

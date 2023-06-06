@@ -24,6 +24,49 @@ it('can create a review', function () {
         ->and($testModel->reviews()->first()->answers()->count())->toBe(1);
 });
 
+it('can create a review with a comment', function () {
+    $question = Question::factory()->active()->create();
+
+    /** @var TestModel $testModel */
+    $testModel = TestModel::query()->create();
+
+    $testModel->createReview([
+        [
+            'question_id' => $question->id,
+            'rating' => RatingEnum::from(1),
+        ],
+    ], 'test comment');
+
+    expect($testModel->reviews()->count())
+        ->toBe(1)
+        ->and($testModel->reviews()->first()->answers()->count())->toBe(1)
+        ->and($testModel->reviews()->first()->comment)->toBe('test comment');
+});
+
+it('can get the original question from a review answer', function () {
+    $this->withoutExceptionHandling();
+
+    $question = Question::factory()->active()->create();
+
+    $originalTitle = $question->title;
+
+    /** @var TestModel $testModel */
+    $testModel = TestModel::query()->create();
+
+    $testModel->createReview([
+        [
+            'question_id' => $question->id,
+            'rating' => RatingEnum::from(1),
+        ],
+    ], 'test comment');
+
+    $question->update(['title' => 'updated title']);
+
+    $review = $testModel->reviews()->first();
+
+    expect($review->answers->first()->question_title)->toBe($originalTitle);
+});
+
 it('can create a review with an author when authenticated', function () {
     $user = new UserModel();
     $user->forceFill(['id' => 1]);

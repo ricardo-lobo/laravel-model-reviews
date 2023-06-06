@@ -11,6 +11,7 @@ use RicardoLobo\LaravelModelReviews\Concerns\Reviewable;
 use RicardoLobo\LaravelModelReviews\Concerns\ReviewAuthorResolverInterface;
 use RicardoLobo\LaravelModelReviews\Concerns\ReviewFactoryInterface;
 use RicardoLobo\LaravelModelReviews\Enums\RatingEnum;
+use RicardoLobo\LaravelModelReviews\Models\Question;
 use RicardoLobo\LaravelModelReviews\Models\Review;
 
 class ReviewFactory implements ReviewFactoryInterface
@@ -27,7 +28,7 @@ class ReviewFactory implements ReviewFactoryInterface
 
         $this->checkForDuplicatedQuestions($answers);
 
-        $this->checkIfQuestionsExistAndAreEnabled($answers);
+        $answers = $this->checkIfQuestionsExistAndAreEnabled($answers);
 
         /** @var Review $review */
         $review = $reviewable->reviews()->make(['comment' => $comment]);
@@ -54,17 +55,31 @@ class ReviewFactory implements ReviewFactoryInterface
         }
     }
 
-    protected function checkIfQuestionsExistAndAreEnabled(array $data): void
+    /**
+     * Check if the questions exist and are enabled.
+     * Merge the questions properties with the data array.
+     */
+    protected function checkIfQuestionsExistAndAreEnabled(array $data): array
     {
         $ids = Arr::pluck($data, 'question_id');
 
         $model = $this->config->get('model-reviews.questions.model');
 
-        /** @var Model $instance */
+        /** @var Question|Model $instance */
         $instance = new $model;
 
         try {
-            $instance->query()->where('active', true)->findOrFail($ids);
+            $questions = $instance->query()->where('active', true)->findOrFail($ids);
+
+            return $questions
+                ->map(function (Question $question) use ($data) {
+                    $answer = Arr::first($data, fn (array $answer) => $answer['question_id'] === $question->getKey());
+
+                    return array_merge($answer, [
+                        'question' => $question,
+                    ]);
+                })
+                ->toArray();
         } catch (ModelNotFoundException) {
             throw ValidationException::withMessages([
                 'questions' => ['The provided questions are invalid.'],
@@ -81,6 +96,7 @@ class ReviewFactory implements ReviewFactoryInterface
         return [
             $data['question_id'] => [
                 'rating' => $rating,
+                'question_title' => $data['question']->title,
             ],
         ];
     }

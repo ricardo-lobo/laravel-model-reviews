@@ -26,6 +26,7 @@ class LaravelModelReviewsServiceProvider extends PackageServiceProvider
                 'create_model_reviews_table',
                 'create_questions_table',
                 'create_answers_table',
+                'update_answers_table',
             ])
             ->hasCommand(LaravelModelReviewsCommand::class);
     }
