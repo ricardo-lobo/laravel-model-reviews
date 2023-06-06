@@ -31,7 +31,7 @@ class ReviewAuthorResolver implements ReviewAuthorResolverInterface
         $guard = $this->authManager->guard($this->authDriver);
 
         $provider = method_exists($guard, 'getProvider') ? $guard->getProvider() : null;
-        $model = method_exists($provider, 'retrieveById') ? $provider?->retrieveById($subject) : null;
+        $model = method_exists($provider, 'retrieveById') ? $provider->retrieveById($subject) : null;
 
         return $model instanceof Model ? $model : null;
     }
