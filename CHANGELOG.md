@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-model-reviews` will be documented in this file.
 
+## v0.0.4 - 2023-06-06
+
+- fix phpstan warnings
+
 ## v0.0.3 - 2023-06-06
 
 - minor bug fix
