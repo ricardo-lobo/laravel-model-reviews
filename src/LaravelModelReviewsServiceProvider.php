@@ -22,7 +22,6 @@ class LaravelModelReviewsServiceProvider extends PackageServiceProvider
             ->name('laravel-model-reviews')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigrations()
             ->hasMigrations([
                 'create_model_reviews_table',
                 'create_questions_table',
