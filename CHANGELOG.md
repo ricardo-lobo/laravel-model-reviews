@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-model-reviews` will be documented in this file.
 
+## 1.0.4 - 2023-06-07
+
+- Add review created event
+
 ## 1.0.3 - 2023-06-06
 
 Add missing relationship methods
