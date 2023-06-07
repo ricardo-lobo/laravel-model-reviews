@@ -6,11 +6,13 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use RicardoLobo\LaravelModelReviews\Concerns\Reviewable;
 use RicardoLobo\LaravelModelReviews\Concerns\ReviewAuthorResolverInterface;
 use RicardoLobo\LaravelModelReviews\Concerns\ReviewFactoryInterface;
 use RicardoLobo\LaravelModelReviews\Enums\RatingEnum;
+use RicardoLobo\LaravelModelReviews\Events\ReviewCreatedEvent;
 use RicardoLobo\LaravelModelReviews\Models\Question;
 use RicardoLobo\LaravelModelReviews\Models\Review;
 
@@ -30,18 +32,21 @@ class ReviewFactory implements ReviewFactoryInterface
 
         $answers = $this->checkIfQuestionsExistAndAreEnabled($answers);
 
-        /** @var Review $review */
         $review = $reviewable->reviews()->make(['comment' => $comment]);
 
         if ($author = $this->getAuthor($reviewable)) {
             $review->author()->associate($author);
         }
 
-        $review->save();
+        DB::transaction(function() use ($review, $answers) {
+            $review->save();
 
-        $review->questions()->sync(
-            collect($answers)->mapWithKeys(fn (array $answer) => $this->createAnswerMappingFromArray($answer))
-        );
+            $review->questions()->sync(
+                collect($answers)->mapWithKeys(fn (array $answer) => $this->createAnswerMappingFromArray($answer))
+            );
+
+            event(new ReviewCreatedEvent($review));
+        });
     }
 
     protected function checkForDuplicatedQuestions(array $data): void
