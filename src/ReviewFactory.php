@@ -14,7 +14,6 @@ use RicardoLobo\LaravelModelReviews\Concerns\ReviewFactoryInterface;
 use RicardoLobo\LaravelModelReviews\Enums\RatingEnum;
 use RicardoLobo\LaravelModelReviews\Events\ReviewCreatedEvent;
 use RicardoLobo\LaravelModelReviews\Models\Question;
-use RicardoLobo\LaravelModelReviews\Models\Review;
 
 class ReviewFactory implements ReviewFactoryInterface
 {
@@ -38,7 +37,7 @@ class ReviewFactory implements ReviewFactoryInterface
             $review->author()->associate($author);
         }
 
-        DB::transaction(function() use ($review, $answers) {
+        DB::transaction(function () use ($review, $answers) {
             $review->save();
 
             $review->questions()->sync(
