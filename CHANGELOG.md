@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-model-reviews` will be documented in this file.
 
+## 2.1.0 - 2026-06-09
+
+- Add Laravel 12 support (`illuminate/contracts` now allows `^11.0|^12.0`). Backward compatible with Laravel 11.
+
 ## 1.0.4 - 2023-06-07
 
 - Add review created event
