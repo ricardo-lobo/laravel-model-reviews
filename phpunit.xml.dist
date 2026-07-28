@@ -5,13 +5,12 @@
       <directory>tests</directory>
     </testsuite>
   </testsuites>
-  <coverage>
-    <report>
-      <html outputDirectory="build/coverage"/>
-      <text outputFile="build/coverage.txt"/>
-      <clover outputFile="build/logs/clover.xml"/>
-    </report>
-  </coverage>
+  <!--
+    Coverage reports are deliberately not configured here. Declaring <report>
+    outputs makes PHPUnit attempt to collect coverage on every run, which warns
+    when no driver (Xdebug/PCOV) is installed, and failOnWarning turns that
+    warning into a failed run. Use `composer test-coverage` to opt in.
+  -->
   <logging>
     <junit outputFile="build/report.junit.xml"/>
   </logging>

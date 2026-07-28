@@ -2,6 +2,10 @@ name: Fix PHP code style issues
 
 on:
   push:
+    # Branches only. On a tag push the checkout is detached, so the auto-commit
+    # step has nothing it can push back to.
+    branches:
+      - '**'
     paths:
       - '**.php'
 
