@@ -13,18 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        # Pest 4 requires PHP 8.3+, so 8.1/8.2 are no longer testable.
+        # Laravel 13 requires PHP 8.3+.
         php: [8.3, 8.4]
-        # Laravel 11 is still supported by the composer constraint but cannot be
-        # exercised here: every stable 11.x release (v11.0.0 - v11.55.0) is
-        # flagged by a security advisory, so composer's audit refuses to install
-        # it. The only resolvable 11.x is the unreleased 11.x-dev branch, which
-        # is not something to gate CI on.
-        laravel: [12.*, 13.*]
-        stability: [prefer-stable]
+        laravel: [13.*]
+        stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 12.*
-            testbench: 10.*
           - laravel: 13.*
             testbench: 11.*
 
