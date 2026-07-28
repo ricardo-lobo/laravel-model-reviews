@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 use RicardoLobo\LaravelModelReviews\Enums\RatingEnum;
 use RicardoLobo\LaravelModelReviews\Models\Question;
 use RicardoLobo\LaravelModelReviews\Models\Review;
@@ -68,7 +70,7 @@ it('can get the original question from a review answer', function () {
 });
 
 it('can create a review with an author when authenticated', function () {
-    $user = new UserModel();
+    $user = new UserModel;
     $user->forceFill(['id' => 1]);
 
     $this->actingAs($user);
@@ -102,7 +104,7 @@ it('checks if the questions exist before creating a review', function () {
             'rating' => RatingEnum::from(1),
         ],
     ]);
-})->throws(Illuminate\Validation\ValidationException::class, 'The provided questions are invalid.');
+})->throws(ValidationException::class, 'The provided questions are invalid.');
 
 it('checks if there are duplicated questions when creating a review', function () {
     /** @var TestModel $testModel */
@@ -118,10 +120,10 @@ it('checks if there are duplicated questions when creating a review', function (
             'rating' => RatingEnum::from(1),
         ],
     ]);
-})->throws(Illuminate\Validation\ValidationException::class, 'The provided questions are duplicated.');
+})->throws(ValidationException::class, 'The provided questions are duplicated.');
 
 it('can create a review from a request', function () {
-    \Illuminate\Support\Facades\Route::post('{id}/review', function ($id) {
+    Route::post('{id}/review', function ($id) {
         $testModel = TestModel::query()->findOrFail($id);
 
         $testModel->createReviewFromRequest();
@@ -129,7 +131,7 @@ it('can create a review from a request', function () {
         return response('success!');
     });
 
-    $user = new UserModel();
+    $user = new UserModel;
     $user->forceFill(['id' => 1]);
 
     $this->actingAs($user);
@@ -157,7 +159,7 @@ it('can create a review from a request', function () {
 it('checks if the questions exist before creating a review from a request', function () {
     $this->withoutExceptionHandling();
 
-    \Illuminate\Support\Facades\Route::post('{id}/review', function ($id) {
+    Route::post('{id}/review', function ($id) {
         $testModel = TestModel::query()->findOrFail($id);
 
         $testModel->createReviewFromRequest();
@@ -165,7 +167,7 @@ it('checks if the questions exist before creating a review from a request', func
         return response('success!');
     });
 
-    $user = new UserModel();
+    $user = new UserModel;
     $user->forceFill(['id' => 1]);
 
     $this->actingAs($user);
@@ -181,12 +183,12 @@ it('checks if the questions exist before creating a review from a request', func
                 ],
             ],
         ]);
-})->throws(\Illuminate\Validation\ValidationException::class, 'The selected review.0.question_id is invalid.');
+})->throws(ValidationException::class, 'The selected review.0.question_id is invalid.');
 
 it('checks if the questions are duplicated before creating a review from a request', function () {
     $this->withoutExceptionHandling();
 
-    \Illuminate\Support\Facades\Route::post('{id}/review', function ($id) {
+    Route::post('{id}/review', function ($id) {
         $testModel = TestModel::query()->findOrFail($id);
 
         $testModel->createReviewFromRequest();
@@ -194,7 +196,7 @@ it('checks if the questions are duplicated before creating a review from a reque
         return response('success!');
     });
 
-    $user = new UserModel();
+    $user = new UserModel;
     $user->forceFill(['id' => 1]);
 
     $this->actingAs($user);
@@ -216,4 +218,4 @@ it('checks if the questions are duplicated before creating a review from a reque
                 ],
             ],
         ]);
-})->throws(\Illuminate\Validation\ValidationException::class, 'The review.0.question_id field has a duplicate value.');
+})->throws(ValidationException::class, 'The review.0.question_id field has a duplicate value.');

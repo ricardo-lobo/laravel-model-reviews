@@ -2,6 +2,4 @@
 
 namespace RicardoLobo\LaravelModelReviews;
 
-class LaravelModelReviews
-{
-}
+class LaravelModelReviews {}

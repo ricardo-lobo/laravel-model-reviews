@@ -7,7 +7,5 @@ use RicardoLobo\LaravelModelReviews\Models\Review;
 
 class ReviewCreatedEvent
 {
-    public function __construct(public Model|Review $review)
-    {
-    }
+    public function __construct(public Model|Review $review) {}
 }

@@ -1,5 +1,11 @@
 <?php
 
+use RicardoLobo\LaravelModelReviews\Models\Answer;
+use RicardoLobo\LaravelModelReviews\Models\Question;
+use RicardoLobo\LaravelModelReviews\Models\Review;
+use RicardoLobo\LaravelModelReviews\ReviewAuthorResolver;
+use RicardoLobo\LaravelModelReviews\ReviewFactory;
+
 // config for RicardoLobo/LaravelModelReviews
 return [
 
@@ -15,25 +21,25 @@ return [
         /**
          * You can specify a custom resolver here that gets user models.
          */
-        'resolver' => \RicardoLobo\LaravelModelReviews\ReviewAuthorResolver::class,
+        'resolver' => ReviewAuthorResolver::class,
     ],
 
     'questions' => [
-        'model' => \RicardoLobo\LaravelModelReviews\Models\Question::class,
+        'model' => Question::class,
         'table' => 'questions',
     ],
 
     'reviews' => [
-        'model' => \RicardoLobo\LaravelModelReviews\Models\Review::class,
+        'model' => Review::class,
         'table' => 'reviews',
     ],
 
     'answers' => [
-        'model' => \RicardoLobo\LaravelModelReviews\Models\Answer::class,
+        'model' => Answer::class,
         'table' => 'review_question',
     ],
 
     'factories' => [
-        'review' => \RicardoLobo\LaravelModelReviews\ReviewFactory::class,
+        'review' => ReviewFactory::class,
     ],
 ];
