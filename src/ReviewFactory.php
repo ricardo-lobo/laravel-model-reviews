@@ -20,10 +20,9 @@ class ReviewFactory implements ReviewFactoryInterface
     public function __construct(
         protected Repository $config,
         protected ReviewAuthorResolverInterface $authorResolver
-    ) {
-    }
+    ) {}
 
-    public function create(Reviewable $reviewable, array $answers, string $comment = null): void
+    public function create(Reviewable $reviewable, array $answers, ?string $comment = null): void
     {
         $answers = is_array(Arr::first($answers)) ? $answers : [$answers];
 

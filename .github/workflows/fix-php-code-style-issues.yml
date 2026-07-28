@@ -14,14 +14,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          # github.head_ref is empty on push events, which left the previous
+          # checkout on a detached ref that the auto-commit step could not push.
+          ref: ${{ github.ref_name }}
 
       - name: Fix PHP code style issues
-        uses: aglipanci/laravel-pint-action@2.3.0
+        uses: aglipanci/laravel-pint-action@2.5
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Fix styling

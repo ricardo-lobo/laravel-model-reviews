@@ -26,7 +26,7 @@ trait HasReviews
         );
     }
 
-    public function createReview(array $data, string $comment = null): Model
+    public function createReview(array $data, ?string $comment = null): Model
     {
         app(ReviewFactoryInterface::class)->create(
             reviewable: $this,

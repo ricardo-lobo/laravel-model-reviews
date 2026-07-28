@@ -5,10 +5,12 @@ parameters:
     level: 4
     paths:
         - src
-        - config
         - database
+    # config/ is deliberately not analysed. Larastan resolves the "config
+    # directory" via config_path(), which in a package context points at
+    # testbench's app, so every env() call in this package's own config file is
+    # reported as being outside the config directory.
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
-    checkMissingIterableValueType: false
 
